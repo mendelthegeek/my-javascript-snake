@@ -1,0 +1,6 @@
+#snake{
+	position: relative;
+	display: block;
+	margin: auto;
+	border: 3px solid #000;
+}
