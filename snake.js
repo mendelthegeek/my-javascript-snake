@@ -7,16 +7,13 @@ function reset() {
 		board[i] = [];
 		for ( var j = 0; j < 25; j++ ) {
 			board[i][j] = 0;
-			/*if ( j == 24 ){
-				board[i][j] = "<br>";
-			}*/
 		}
 	}
 
 	pos = {
 		"head": {
 			"x": 0,
-			"y": 5
+			"y": 4
 		},
 		"tail": {
 			"x": 0,

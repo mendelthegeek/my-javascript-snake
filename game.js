@@ -4,11 +4,11 @@ function startNew(){
 	reset();
 	
 	ic = 0;
-	pi = -1;
+	pi = 0;
 
 	do {
-		board[ic][pi] = 1;
-	} while ( pi++ <= pos.head.y );
+		board[ic][pi++] = 1;
+	} while ( pi <= pos.head.y );
 
 	setTimeout(tick,500);
 }
@@ -16,6 +16,7 @@ function startNew(){
 var pizza = 0;
 
 function tick() {
+//console.log( pos.tail.x + " - " + pos.tail.y );
 	board[pos.tail.x][pos.tail.y] = 0;
 	
 	pizza++;
@@ -30,7 +31,6 @@ function tick() {
 	pos.head[dir.head.axis] += dir.head.plusMinus;
 //console.log(pos);
 	
-	//document.getElementById("rapFood").innerHTML = board;
 	render();
 	pos.tail[dir.tail.axis] += dir.tail.plusMinus;
 	if ( corner[temp] && corner[temp].x == pos.tail.x && corner[temp].y == pos.tail.y ) {
