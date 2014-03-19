@@ -13,11 +13,11 @@ function reset() {
 	pos = {
 		"head": {
 			"x": 0,
-			"y": 4
+			"y": 3
 		},
 		"tail": {
 			"x": 0,
-			"y": 0
+			"y": -2
 		}
 	};
 
@@ -44,3 +44,33 @@ function Corner() {
 }
 
 //console.log(dir.head);
+
+function moveHead() {
+	
+	pizza++;
+	
+	if ( pizza % 5 == 0 ) {
+		turnSnake();
+	}
+	
+	pos.head[dir.head.axis] += dir.head.plusMinus;
+	
+}
+
+function moveTail() {
+	
+	pos.tail[dir.tail.axis] += dir.tail.plusMinus;
+	
+	if ( corner[temp] && corner[temp].x == pos.tail.x && corner[temp].y == pos.tail.y ) {
+		dir.tail = JSON.parse(JSON.stringify(corner[temp].dir));
+		temp++;
+	}
+	
+}
+
+function turnSnake() {
+
+	dir.head.axis = dir.head.axis == "x"? "y" : "x";
+	corner.push( new Corner());
+	
+}

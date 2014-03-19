@@ -16,28 +16,21 @@ function startNew(){
 var pizza = 0;
 
 function tick() {
-//console.log( pos.tail.x + " - " + pos.tail.y );
+//console.log( pos.tail.x + " - " + pos.tail.y );	
+
+	moveHead();
+	
+	board[pos.head.x][pos.head.y] = 1;
+	
+	moveTail();
+	
 	board[pos.tail.x][pos.tail.y] = 0;
-	
-	pizza++;
-	
-	if ( pizza % 5 == 0 ) {
-		dir.head.axis = dir.head.axis == "x"? "y" : "x";
-		corner.push( new Corner());
-	}
 	
 //console.log(dir.head);
 	
-	pos.head[dir.head.axis] += dir.head.plusMinus;
 //console.log(pos);
 	
 	render();
-	pos.tail[dir.tail.axis] += dir.tail.plusMinus;
-	if ( corner[temp] && corner[temp].x == pos.tail.x && corner[temp].y == pos.tail.y ) {
-		dir.tail = JSON.parse(JSON.stringify(corner[temp].dir));
-		temp++;
-	}
-	board[pos.head.x][pos.head.y] = 1;
 	
 	setTimeout(tick,200);
 }
