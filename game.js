@@ -1,14 +1,5 @@
-var temp = 0;
-
 function startNew(){
 	reset();
-	
-	ic = 0;
-	pi = 0;
-
-	do {
-		board[ic][pi++] = 1;
-	} while ( pi <= pos.head.y );
 
 	setTimeout(tick,500);
 }
