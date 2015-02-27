@@ -1,21 +1,30 @@
 function startNew(){
 	reset();
+	
+	addFood();
 
 	setTimeout(tick,500);
+}
+
+function gameOver() {
+	alert( 'game over' );
+	startNew();
 }
 	
 var pizza = 0;
 
 function tick() {
-//console.log( pos.tail.x + " - " + pos.tail.y );	
+//console.log( pos.tail.x + " - " + pos.tail.y );
 
 	moveHead();
 	
+	if ( board[pos.head.x][pos.head.y] != 2 ) {	
+		moveTail();
+	}  else {
+		addFood();
+	}
+		
 	board[pos.head.x][pos.head.y] = 1;
-	
-	moveTail();
-	
-	board[pos.tail.x][pos.tail.y] = 0;
 	
 //console.log(dir.head);
 	
@@ -37,7 +46,7 @@ function drawBlock( x, y, ctx ) {
 }
 
 function render() {
-	var canvas = document.getElementById( 'snake' );
+	var canvas = document.getElementById( 'game' );
 	var ctx = canvas.getContext( '2d' );
 
 	ctx.fillStyle = "white";
@@ -56,3 +65,40 @@ function render() {
 }
 
 var colors = ["red","blue"];
+
+function addFood() {
+
+	var coords = generateCoords();
+	
+	board[coords.x][coords.y] = 2;
+		
+	function generateCoords() {
+		var x,y;
+		x = produceRandom(25);
+		y = produceRandom(25);
+		
+console.log( x + "-" + y );
+
+console.log( !!board[x][y] );
+		
+		return board[x][y]? generateCoords(): {"x":x,"y":y};
+	}
+}
+
+function produceRandom(foo)/*, bar*/ {
+	var rand = Math.floor( Math.random() * foo );
+	return /*bar?rand+bar:*/rand;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

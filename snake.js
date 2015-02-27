@@ -37,7 +37,7 @@ function reset() {
 		}
 	
 	function produceRandom() {
-		return Math.floor( Math.random() * 5 ) + 10;
+		return Math.floor( Math.random() * 10 ) + 5;
 	}
 
 		/* ******* */
@@ -61,8 +61,8 @@ function reset() {
 	var y = pos.tail.y;
 
 	do {
-		board[x][++y] = 1;
-	} while ( y <= pos.head.y );
+		board[x][y] = 1;
+	} while ( ++y <= pos.head.y );
 
 }
 	
@@ -77,10 +77,16 @@ function Corner() {
 //console.log(dir.head);
 
 function moveHead() {
+
+	temp = JSON.parse(JSON.stringify( pos ) );
+
+	temp.head[dir.head.axis] += dir.head.plusMinus;
+	
+	if ( board[temp.head.x][temp.head.y] == 1 ) {
+		gameOver();
+	}
 	
 	pos.head[dir.head.axis] += dir.head.plusMinus;
-	
-	justTurned = false;
 }
 
 function moveTail() {
@@ -92,10 +98,16 @@ function moveTail() {
 		
 		corner.splice( 0, 1 );
 	}
-	console.log(pos.head.x + "," + pos.head.y + '\n' + pos.tail.x + "," + pos.tail.y);
-	for ( i in corner ){
-		console.log( corner[i].x + "," + corner[i].y + '\n');
-	}
+	
+	justTurned = false;
+	
+/*console.log(pos.head.x + "," + pos.head.y + '\n' + pos.tail.x + "," + pos.tail.y);
+for ( i in corner ){
+console.log( corner[i].x + "," + corner[i].y + '\n');
+}*/
+	
+	board[pos.tail.x][pos.tail.y] = 0;
+
 }
 
 function turnSnake( direction ) {
