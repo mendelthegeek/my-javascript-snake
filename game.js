@@ -77,17 +77,13 @@ function addFood() {
 		x = produceRandom(25);
 		y = produceRandom(25);
 		
-console.log( x + "-" + y );
-
-console.log( !!board[x][y] );
-		
 		return board[x][y]? generateCoords(): {"x":x,"y":y};
 	}
 }
 
-function produceRandom(foo)/*, bar*/ {
+function produceRandom(foo, bar) {
 	var rand = Math.floor( Math.random() * foo );
-	return /*bar?rand+bar:*/rand;
+	return bar?rand+bar:rand;
 }
 
 

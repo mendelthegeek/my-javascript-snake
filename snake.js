@@ -11,10 +11,9 @@ var justTurned = false;
 
 function reset() {
 
-		/* ******* */
-
+		//clear board
 	board = [];
-
+		//new (empty) board
 	for ( var i = 0; i < 25; i++ ) {
 		board[i] = [];
 		for ( var j = 0; j < 25; j++ ) {
@@ -24,23 +23,16 @@ function reset() {
 
 		/* ******* */
 
-	pos = new Object();
-	
-		pos.head = {
-			"x": produceRandom(),
-			"y": produceRandom()
-		};
-		
+	pos = {
+		"head": {
+			"x": produceRandom(10,5),
+			"y": produceRandom(10,5)
+		}
+	};		
 		pos.tail = {
 			"x": pos.head.x,
 			"y": pos.head.y - snakeLength
 		}
-	
-	function produceRandom() {
-		return Math.floor( Math.random() * 10 ) + 5;
-	}
-
-		/* ******* */
 
 	dir = {
 		"head": {
@@ -52,17 +44,15 @@ function reset() {
 			"axis": "y"
 		}
 	};
-
-	//corner = [ new Corner() ];
 	
 		/* ******* */
 			
-	var x = pos.head.x;
+	var x = pos.tail.x;
 	var y = pos.tail.y;
 
 	do {
-		board[x][y] = 1;
-	} while ( ++y <= pos.head.y );
+		board[x][++y] = 1;
+	} while ( y <= pos.head.y -1 );
 
 }
 	
